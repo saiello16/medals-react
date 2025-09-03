@@ -2,21 +2,15 @@ import React from "react";
 import { FaTrash } from "react-icons/fa"; // using react-icons for trash icon
 import Medal from "./Medal";
 
-function Country({ id, name, medals, onDelete }) {
+function Country({ country, onIncrement, onDecrement, onDelete }) {
+  const total = country.gold + country.silver + country.bronze;
+
   return (
-    <div
-      style={{
-        border: "1px solid #444",
-        borderRadius: "8px",
-        padding: "10px",
-        minWidth: "160px",
-        backgroundColor: "#a11e8bff",
-      }}
-    >
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <h2 style={{ margin: 0 }}>{name}</h2>
+    <div className="country">
+      <div className="country-header">
+        <h3>{country.name} <span>{total}</span></h3>
         <button
-          onClick={() => onDelete(id)}
+          onClick={() => onDelete(country.id)}
           style={{
             background: "none",
             border: "none",
@@ -28,11 +22,27 @@ function Country({ id, name, medals, onDelete }) {
           <FaTrash />
         </button>
       </div>
-      <div className="medals">
-        {medals.map((medal) => (
-          <Medal key={medal.id} medal={medal} />
-        ))}
-      </div>
+
+      <Medal
+        medalType="gold"
+        count={country.gold}
+        onIncrement={() => onIncrement(country.id, "gold")}
+        onDecrement={() => onDecrement(country.id, "gold")}
+      />
+
+      <Medal
+        medalType="silver"
+        count={country.silver}
+        onIncrement={() => onIncrement(country.id, "silver")}
+        onDecrement={() => onDecrement(country.id, "silver")}
+      />
+
+      <Medal
+        medalType="bronze"
+        count={country.bronze}
+        onIncrement={() => onIncrement(country.id, "bronze")}
+        onDecrement={() => onDecrement(country.id, "bronze")}
+      />
     </div>
   );
 }

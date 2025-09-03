@@ -41,7 +41,102 @@
   color: #888;
 }
 
-.medals {
-  text-align: left;
-  border-top: black solid ;
+/* General layout */
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 2rem;
+}
+
+/* Header */
+h1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  color: #2c3e50;
+  gap: 1rem;
+}
+
+/* Emoji styling */
+h1::before, h1::after {
+  content: "🏅";
+  font-size: 2.2rem;
+}
+
+/* Countries container */
+.countries {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+/* Country card */
+.country {
+  background-color: #8e24aa; /* lighter purple */
+  color: white;
+  padding: 1rem;
+  border-radius: 12px;
+  width: 220px;
+  height: 200px; /* same height for all cards */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Country header */
+.country-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+  padding-bottom: 0.3rem;
+}
+
+/* Medal rows */
+.medal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0.4rem 0;
+  font-size: 0.95rem;
+}
+
+/* Medal buttons */
+.medal button {
+  margin: 0 0.2rem;
+  padding: 0.25rem 0.6rem;
+  border: none;
+  border-radius: 6px;
+  background-color: #fff;
+  color: #6a1b9a;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.medal button:hover:not(:disabled) {
+  background-color: #f3e5f5;
+}
+
+.medal button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Delete button */
+.delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  color: white;
 }
