@@ -140,3 +140,73 @@ h1::before, h1::after {
   font-size: 1rem;
   color: white;
 }
+
+.new-country {
+  margin-bottom: 1rem;
+}
+
+.new-country button {
+  background-color: #6a1b9a;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dialog {
+  background: white;
+  color: black;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 300px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+}
+
+.dialog h2 {
+  margin-top: 0;
+}
+
+.dialog input {
+  width: 100%;
+  padding: 0.5rem;
+  margin: 1rem 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.dialog-actions button {
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.dialog-actions button[type="submit"] {
+  background-color: #6a1b9a;
+  color: white;
+}
+
+.dialog-actions button[type="button"] {
+  background-color: #ccc;
+  color: black;
+}

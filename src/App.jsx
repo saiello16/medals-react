@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Country from "./components/Country";
+import NewCountry from "./components/NewCountry";
 import "./App.css";
 
 function App() {
@@ -34,6 +35,21 @@ function App() {
     setCountries((prev) => prev.filter((c) => c.id !== countryId));
   };
 
+  // Add new country
+  const handleAddCountry = (name) => {
+    setCountries((prev) => [
+      ...prev,
+      {
+        id: Date.now(), // simple unique id
+        name,
+        gold: 0,
+        silver: 0,
+        bronze: 0,
+      },
+    ]);
+  };
+
+
   // Totals across all countries
   const totalGold = countries.reduce((sum, c) => sum + c.gold, 0);
   const totalSilver = countries.reduce((sum, c) => sum + c.silver, 0);
@@ -44,6 +60,9 @@ function App() {
     <div className="app">
       <h1>Olympic Medals {totalMedals}</h1>
 
+      {/* NewCountry Trigger */}
+      <NewCountry onAddCountry={handleAddCountry} />
+      
       <div className="countries">
         {countries.map((country) => (
           <Country
