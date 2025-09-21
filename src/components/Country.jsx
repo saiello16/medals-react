@@ -1,49 +1,51 @@
-import React from "react";
-import { FaTrash } from "react-icons/fa"; // using react-icons for trash icon
 import Medal from "./Medal";
+import { Box, Table, Flex, Badge, Button } from "@radix-ui/themes";
+import { TrashIcon } from "@radix-ui/react-icons";
 
-function Country({ country, onIncrement, onDecrement, onDelete }) {
-  const total = country.gold + country.silver + country.bronze;
+function Country(props) {
+  function getMedalsTotal() {
+    let sum = 0;
+    props.medals.forEach((medal) => {
+      sum += props.country[medal.name];
+    });
+    return sum;
+  }
 
   return (
-    <div className="country">
-      <div className="country-header">
-        <h3>{country.name} <span>{total}</span></h3>
-        <button
-          onClick={() => onDelete(country.id)}
-          style={{
-            background: "none",
-            border: "none",
-            cursor: "pointer",
-            color: "#333",
-          }}
-          title="Delete country"
-        >
-          <FaTrash />
-        </button>
-      </div>
-
-      <Medal
-        medalType="gold"
-        count={country.gold}
-        onIncrement={() => onIncrement(country.id, "gold")}
-        onDecrement={() => onDecrement(country.id, "gold")}
-      />
-
-      <Medal
-        medalType="silver"
-        count={country.silver}
-        onIncrement={() => onIncrement(country.id, "silver")}
-        onDecrement={() => onDecrement(country.id, "silver")}
-      />
-
-      <Medal
-        medalType="bronze"
-        count={country.bronze}
-        onIncrement={() => onIncrement(country.id, "bronze")}
-        onDecrement={() => onDecrement(country.id, "bronze")}
-      />
-    </div>
+    <Box width="300px">
+      <Table.Root variant="surface">
+        <Table.Header>
+          <Table.Row>
+            <Table.ColumnHeaderCell colSpan="2">
+              <Flex justify="between">
+                <span>
+                  {props.country.name}
+                  <Badge variant="outline" ml="2">
+                    {getMedalsTotal(props.country, props.medals)}
+                  </Badge>
+                </span>
+                <Button color="red" variant="ghost" size="1">
+                  <TrashIcon onClick={() => props.onDelete(props.country.id)} />
+                </Button>
+              </Flex>
+            </Table.ColumnHeaderCell>
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          {props.medals
+            .sort((a, b) => a.rank - b.rank)
+            .map((medal) => (
+              <Medal
+                key={medal.id}
+                medal={medal}
+                country={props.country}
+                onIncrement={props.onIncrement}
+                onDecrement={props.onDecrement}
+              />
+            ))}
+        </Table.Body>
+      </Table.Root>
+    </Box>
   );
 }
 
